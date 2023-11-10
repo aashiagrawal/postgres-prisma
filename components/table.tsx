@@ -5,11 +5,18 @@ import RefreshButton from './refresh-button'
 
 export default async function Table() {
   const startTime = Date.now()
-  const users = await prisma.users.findMany()
+  // const users = await prisma.users.findMany()
+  const users = ["aashi"]
+  // const dashboard = await prisma.dashboard.findMany()
   const duration = Date.now() - startTime
+
+  console.log("helere")
+  console.log(prisma)
 
   return (
     <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
+        {/* {console.log(dashboard.name)} */}
+        {console.log("sdfsdfsdfs")}
       <div className="flex justify-between items-center mb-4">
         <div className="space-y-1">
           <h2 className="text-xl font-semibold">Recent Users</h2>
