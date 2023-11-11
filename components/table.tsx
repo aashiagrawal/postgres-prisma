@@ -1,7 +1,5 @@
 import prisma from '@/lib/prisma'
-import { timeAgo } from '@/lib/utils'
-import Image from 'next/image'
-import RefreshButton from './refresh-button'
+import Dashboard from './dashboard'
 
 export default async function Table() {
   const dashboards = await prisma.dashboard.findMany()
@@ -23,11 +21,12 @@ export default async function Table() {
             key = {dash.name}
             className="flex items-center justify-between py-3"
           >
-            <div className="flex items-center space-x-4">
+            <Dashboard name={dash.name} containerStyle={"React.CSSProperties"} onClickDashboardItem={"none"}></Dashboard>
+            {/* <div className="flex items-center space-x-4">
               <div className="space-y-1">
                 <p className="font-medium leading-none">{dash.name}</p>
               </div>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
