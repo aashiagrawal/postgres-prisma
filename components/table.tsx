@@ -33,6 +33,7 @@
 //     </div>
 //   )
 // }
+'use client'
 import React, { useState, useEffect } from 'react';
 import Dashboard from './dashboard';
 import prisma from '@/lib/prisma';

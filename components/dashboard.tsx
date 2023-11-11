@@ -21,7 +21,7 @@
 
 // export default Dashboard
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Chart from './chart';
 import { DashboardItem } from '@/types/dashboardItem';
 
