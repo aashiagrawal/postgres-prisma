@@ -19,6 +19,6 @@ model Chart {
 
 model Dashboard {
   id    Int     @id @default(autoincrement())
-  name  String
+  name  String  @unique
   Chart Chart[]
 }
