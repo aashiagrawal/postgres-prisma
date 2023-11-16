@@ -20,12 +20,13 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
     // State to hold the chart data
     const [chart, setChart] = useState<ChartData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [query, setQuery] = useState("");
+    const [data, setData] = useState<any[]>([]);
     const [isBar, setBar] = useState(false);
     const [isLine, setLine] = useState(false);
 
     useEffect(() => {
         const fetchChart = async () => {
-            console.log(`Fetching chart for chartId: ${chartId}`);
             try {
                 const response = await fetch(`/api/chart/${chartId}`);
                 if (!response.ok) {
@@ -33,6 +34,7 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
                 }
                 const data = await response.json();
                 setChart(data); 
+                setQuery(data.sqlQuery);
                 if (data.type == "Bar") {
                     setBar(true);
                 } else if (data.type == "Line") {
@@ -50,6 +52,24 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
         fetchChart();
     }, [chartId]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`/api/query/${query}`);
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+                const res = await response.json();
+                console.log(res);
+                setData(res); 
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchData();
+    }, [chart]);
 
     // Render the chart data if it is available
     return (
@@ -59,8 +79,8 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
             ) : chart ? (
                 <>  
                     <h3 className="my-2">{chart.name}</h3>
-                    {isBar && <Barchart query={chart.sqlQuery} />}
-                    {isLine && <Linechart query={chart.sqlQuery} />}
+                    {isBar && <Barchart queryData={data}/>}
+                    {isLine && <Linechart queryData={data}/>}
                 </>
             ) : (
                 <p>Chart data not available.</p>
