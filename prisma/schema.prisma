@@ -11,7 +11,8 @@ model Chart {
   id          Int       @id @default(autoincrement())
   name        String
   dashboardId Int
-  sqlQuery    String
+  sqlQuery    String    
+  type        String    
   xAxisField  String
   yAxisField  String
   Dashboard   Dashboard @relation(fields: [dashboardId], references: [id])
@@ -21,4 +22,15 @@ model Dashboard {
   id    Int     @id @default(autoincrement())
   name  String  @unique
   Chart Chart[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CustomerData {
+  Name                String  @id
+  items_purchased     BigInt? 
+  purchase_date       String?
+  age                 BigInt?
+  birth_month         String?
+  groceries_purchased String?
+  day                 String?
 }

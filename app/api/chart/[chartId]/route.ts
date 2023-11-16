@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
 const prisma = new PrismaClient();
-export async function GET(request, {params}) {
+
+export async function GET(request: NextRequest, { params }: { params: { chartId: number } }) {
     const chartId = params.chartId;
     console.log(chartId);
     try {
@@ -13,11 +14,12 @@ export async function GET(request, {params}) {
         });
         if (chart) {
             console.log(chart);
-            return NextResponse.json(chart)
+            return NextResponse.json(chart);
         } else {
-            return new Response("no charts found");
+            return new Response("No charts found");
         }
-    } catch (error){
-        console.log("error fetching charts");
+    } catch (error) {
+        console.error("Error fetching charts:", error);
+        return new Response("Internal Server Error", { status: 500 });
     }
 }

@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
 const prisma = new PrismaClient();
-export async function GET(request, {params}) {
+export async function GET(request: NextRequest, { params }: { params: { name: string } }) { 
     const dashboardName = decodeURI(params.name);
     console.log(dashboardName);
     try {

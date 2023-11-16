@@ -23,12 +23,6 @@ export default async function Table() {
             className="flex items-center justify-between py-3"
           >
             <Link href={`/dashboard/${dash.name}`}><Dashboard name={dash.name} containerStyle={"React.CSSProperties"} onClickDashboardItem={""}></Dashboard></Link>
-            {/* <Dashboard name={dash.name} containerStyle={"React.CSSProperties"} onClickDashboardItem={""}></Dashboard> */}
-            {/* <div className="flex items-center space-x-4">
-              <div className="space-y-1">
-                <p className="font-medium leading-none">{dash.name}</p>
-              </div>
-            </div> */}
           </div>
         ))}
       </div>
