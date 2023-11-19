@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest, { params }: { params: { chartId: number } }) {
     const chartId = params.chartId;
-    console.log(chartId);
     try {
         const chart = await prisma.chart.findFirst({
             where: {
@@ -13,7 +12,6 @@ export async function GET(request: NextRequest, { params }: { params: { chartId:
             },
         });
         if (chart) {
-            console.log(chart);
             return NextResponse.json(chart);
         } else {
             return new Response("No charts found");

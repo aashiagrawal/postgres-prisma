@@ -64,7 +64,6 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
                     throw new Error(`Error: ${response.status}`);
                 }
                 const res = await response.json();
-                console.log(res);
                 setData(res); 
                 
             } catch (error) {

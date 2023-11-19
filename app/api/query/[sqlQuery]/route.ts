@@ -15,7 +15,6 @@ export async function GET(request: NextRequest, { params }: { params: { sqlQuery
         const query_data = await prisma.$queryRawUnsafe(sqlQuery);
 
         if (query_data) {
-            console.log("this is query data: ", query_data);
             const convertedData = convertBigIntToString(query_data);
             return NextResponse.json(convertedData);
         } else {

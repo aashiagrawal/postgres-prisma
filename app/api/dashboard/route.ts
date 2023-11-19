@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
     const dashboardName = "Dash 1";
-    console.log(dashboardName);
     try {
         const dashboard = await prisma.dashboard.findUnique({
             where: {

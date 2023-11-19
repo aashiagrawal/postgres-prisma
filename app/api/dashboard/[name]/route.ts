@@ -4,7 +4,6 @@ import { NextResponse, NextRequest } from 'next/server';
 const prisma = new PrismaClient();
 export async function GET(request: NextRequest, { params }: { params: { name: string } }) { 
     const dashboardName = decodeURI(params.name);
-    console.log(dashboardName);
     try {
         const dashboard = await prisma.dashboard.findUnique({
             where: {
