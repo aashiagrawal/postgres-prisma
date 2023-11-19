@@ -4,21 +4,27 @@ import {CartesianGrid, XAxis, YAxis, Tooltip, Legend, LineChart, ResponsiveConta
 
 type BarchartProps = {
     queryData: any[];
+    propWidth?: number;
+    propHeight?: number;
   };
 
-const Linechart = ({queryData }: BarchartProps) => {
+const Linechart = ({queryData, propWidth = 500, propHeight = 250 }: BarchartProps) => {
 
     const [data, setData] = useState<any[]>([]);
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
 
     useEffect(() => {
         setData(queryData);
+        setWidth(propWidth);
+        setHeight(propHeight);
       }, [queryData]);
 
   return (
     <div>
         <LineChart
-        width={500}
-        height={300}
+        width={width}
+        height={height}
         data={data}
         margin={{
             top: 5,

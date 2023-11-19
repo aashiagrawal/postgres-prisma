@@ -4,6 +4,7 @@ import Barchart from './barchart';
 import prisma from '@/lib/prisma';
 import { LineChart } from 'recharts';
 import Linechart from './linechart';
+import Example from './modal';
 
 type ChartProps = {
     chartId: string | number;
@@ -24,6 +25,8 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
     const [data, setData] = useState<any[]>([]);
     const [isBar, setBar] = useState(false);
     const [isLine, setLine] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [chartName, setName] = useState("");
 
     useEffect(() => {
         const fetchChart = async () => {
@@ -35,6 +38,7 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
                 const data = await response.json();
                 setChart(data); 
                 setQuery(data.sqlQuery);
+                setName(data.name);
                 if (data.type == "Bar") {
                     setBar(true);
                 } else if (data.type == "Line") {
@@ -62,6 +66,7 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
                 const res = await response.json();
                 console.log(res);
                 setData(res); 
+                
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -71,6 +76,9 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
         fetchData();
     }, [chart]);
 
+    const handleChartClick = () => {
+        setShowModal(!showModal);
+    }
     // Render the chart data if it is available
     return (
         <div>
@@ -79,8 +87,11 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
             ) : chart ? (
                 <>  
                     <h3 className="my-2">{chart.name}</h3>
-                    {isBar && <Barchart queryData={data}/>}
-                    {isLine && <Linechart queryData={data}/>}
+                    <div onClick={handleChartClick}>
+                        {isBar && <Barchart queryData={data}/>}
+                        {isLine && <Linechart queryData={data}/>}
+                    </div>
+                    {showModal && <Example chartType={chart.type} queryData={data} chartName={chartName}></Example>}
                 </>
             ) : (
                 <p>Chart data not available.</p>
