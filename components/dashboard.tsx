@@ -18,7 +18,7 @@ const Dashboard = ({ charts, containerStyle, onClickDashboardItem}: DashboardPro
                                 <div className="flex items-center space-x-3">
                                     <h3 className="truncate text-sm font-medium text-gray-900 font-sans">{chart.name}</h3>
                                     <div onClick={() => onClickDashboardItem(chart.id)}>
-                                        <Chart chartId={chart.id} />
+                                        <Chart chartId={chart.id} containerStyle={{"backgroundColor": "white"}}/>
                                     </div>
                                 </div>
                             </div>

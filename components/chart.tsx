@@ -80,7 +80,7 @@ const Chart = ({ chartId, containerStyle }: ChartProps) => {
     }
     // Render the chart data if it is available
     return (
-        <div>
+        <div style={containerStyle}>
             {isLoading ? (
                 <p>Loading chart...</p>
             ) : chart ? (
