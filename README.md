@@ -11,11 +11,7 @@ For this project, I used TypeScript, ReactJS, Tailwind CSS, NextJS, PostgreSQL, 
 
 ## Run the project locally
 
-In order to test this project locally, first clone the repository and place the following environment variable in a .env file located at the root of the project directory:
-
-```
-DATABASE_URL="postgresql://postgres:QvmH8GIP80sYAmsC@db.dqyttgycvrhmjlgtjviq.supabase.co:5432/postgres"
-```
+In order to test this project locally, first clone the repository and add a DATABASE_URL environment variable to a .env file located at the root of the project directory. DATABASE_URL should contain your PostgreSQL database url. The PostgreSQL database should follow the database schema outlined in the prisma/schema.prisma file for the Dashboard and Chart data tables.
 
 To start the application:
 ```bash
