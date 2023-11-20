@@ -1,7 +1,10 @@
+'use client'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import { Metadata } from 'next'
+import Navbar from '@/components/navbar'
 
-export const metadata = {
+const metadata: Metadata = {
   metadataBase: new URL('https://postgres-prisma.vercel.app'),
   title: 'Vercel Postgres Demo with Prisma',
   description:
@@ -19,9 +22,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en">
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable}>
+        <div className="min-h-full">
+          <Navbar />
+          {children}
+      </div>
+      </body>
     </html>
   )
 }

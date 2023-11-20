@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { NextResponse, NextRequest } from 'next/server';
 
 const prisma = new PrismaClient();
+//function to retrieve all charts associated with a given dashboard name
 export async function GET(request: NextRequest, { params }: { params: { name: string } }) { 
     const dashboardName = decodeURI(params.name);
     try {

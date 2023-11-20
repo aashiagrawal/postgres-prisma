@@ -3,6 +3,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 const prisma = new PrismaClient();
 
+//function to retrieve chart information given a chartid
 export async function GET(request: NextRequest, { params }: { params: { chartId: number } }) {
     const chartId = params.chartId;
     try {

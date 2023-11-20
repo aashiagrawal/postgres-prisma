@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import { Suspense } from 'react'
 import Table from '@/components/table'
 import TablePlaceholder from '@/components/table-placeholder'
@@ -8,13 +6,20 @@ export const dynamic = 'force-dynamic'
 
 export default function Home() {
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center">
-      <h1 className="pt-4 pb-8 bg-gradient-to-br from-black via-[#171717] to-[#575757] bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
-        Dashboards
-      </h1>
-      <Suspense fallback={<TablePlaceholder />}>
-        <Table />
-      </Suspense>
-    </main>
+    <div className="min-h-full">
+        <div className="bg-gray-800 pb-24" />
+
+        <main className="-mt-20">
+          <div className="mx-auto max-w-3xl px-4 pb-12 sm:px-6 lg:px-8">
+          <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
+              <div className="mx-10">
+                 <Suspense fallback={<TablePlaceholder />}>
+                  <Table />
+                </Suspense>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
   )
 }

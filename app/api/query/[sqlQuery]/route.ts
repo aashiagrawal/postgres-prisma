@@ -3,12 +3,14 @@ import { NextResponse, NextRequest } from 'next/server';
 
 const prisma = new PrismaClient();
 
+//converts big int type to a string. Need this function because response from query_data has bigints
 function convertBigIntToString(data: {}) {
     return JSON.parse(JSON.stringify(data, (_, value) =>
         typeof value === 'bigint' ? value.toString() : value
     ));
 }
 
+//function to query the postgres database with a given SQL query to retrieve data that will be displayed in the charts
 export async function GET(request: NextRequest, { params }: { params: { sqlQuery: string } }) {
     const sqlQuery = params.sqlQuery;
     try {
