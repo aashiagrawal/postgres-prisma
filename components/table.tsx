@@ -5,8 +5,6 @@ import Link from 'next/link'
 export default async function Table() {
   const dashboards = await prisma.dashboard.findMany()
 
-  console.log(dashboards)
-
   return (
     <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
       <div className="flex justify-between items-center mb-4">
