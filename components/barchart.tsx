@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar} from 'recharts';
+import {BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts';
 type BarchartProps = {
   queryData: any[];
   propWidth?: number;
@@ -19,14 +19,16 @@ const Barchart = ({ queryData, propWidth = 500, propHeight = 250 }: BarchartProp
 
   return (
     <div>
-      <BarChart width={width} height={height} data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey={data.length > 0 ? Object.keys(data[0])[0] : ''} />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey={data.length > 0 ? Object.keys(data[0])[1] : ''} fill="#8884d8" />
-      </BarChart>
+      {/* <ResponsiveContainer width="100%" height="100%"> */}
+        <BarChart width={width} height={height} data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey={data.length > 0 ? Object.keys(data[0])[0] : ''} />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey={data.length > 0 ? Object.keys(data[0])[1] : ''} fill="#8884d8" />
+        </BarChart>
+      {/* </ResponsiveContainer> */}
     </div>
   )
 }

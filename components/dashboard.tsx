@@ -1,5 +1,6 @@
 import React from "react";
 import Chart from '@/components/chart';
+import AITextBox from "./AITextBox";
 
 type DashboardProps = {
     charts: any[];
@@ -10,6 +11,9 @@ type DashboardProps = {
 const Dashboard = ({ charts, containerStyle, onClickDashboardItem}: DashboardProps) => {
     return (
         <div style={containerStyle}>
+            <div>
+                <AITextBox></AITextBox>
+            </div>
             <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {charts.map(chart => (
                     <li key={chart.id} className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
