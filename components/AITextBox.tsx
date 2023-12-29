@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
 
-export default function Example() {
+export default function AITextBox() {
 
     const [query, setQuery] = useState("")
     const [queryResponse, setQueryResponse] = useState("")
+    // const [visible, setVisible] = useState(false)
 
     const handleTextChange = (event) => {
         setQuery(event.target.value)
@@ -17,17 +18,37 @@ export default function Example() {
 
     const callOpenAi = async () => {
         try {
-            const response = await fetch(`/api/chatgpt/${query}`);
+            const response = await fetch(`/api/chatgpt`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({query})
+            });
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
             const res = await response.json();
-            setQuery(res); 
+            console.log(res.message.content)
+            setQueryResponse(res.message.content); 
             
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
+
+    // useEffect(() => {
+    //   try {
+    //     const respose = await fetch (`/api/query/${queryResponse}`, {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: {name: "chart name", dashboard: "1", sqlQuery: queryResponse, }
+    //     })
+    //   }
+    // }, [queryResponse]);
+
 
   return (
     <div className="flex items-start space-x-4 pb-10">
@@ -67,6 +88,12 @@ export default function Example() {
             </div>
           </div>
         </form>
+        <h2>
+            Quill AI response:
+        </h2>
+        <div>
+            {queryResponse}
+        </div>
       </div>
     </div>
   )

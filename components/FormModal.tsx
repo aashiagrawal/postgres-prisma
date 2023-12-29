@@ -1,35 +1,13 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import Barchart from './barchart';
-import Linechart from './linechart';
-import ChartForm from './ChartForm';
+import ChartForm from './ChartForm'
 
-type ModalProps = {
-    chartType: string;
-    queryData: any[];
-    chartName: string;
+type FormModalProps = {
+    dashboardId: BigInteger;
 };
 
-export default function Modal({ chartType, queryData, chartName }: ModalProps) {
-  const [open, setOpen] = useState(true);
-  const [type, setType] = useState("");
-  const [isBar, setBar] = useState(false);
-  const [isLine, setLine] = useState(false);
-  const [data, setData] = useState<any[]>([]);
-  const [name, setName] = useState("");
-
-  useEffect(()=> {
-    setType(chartType);
-    setData(queryData);
-    setName(chartName);
-    if (chartType == "Bar") {
-        setBar(true);
-    } else if (chartType == "Line") {
-        setLine(true);
-    } else {
-        throw new Error("chart type must be Bar or Line");
-    }
-  }, [chartType, queryData]);
+export default function FormModal({dashboardId}: FormModalProps) {
+  const [open, setOpen] = useState(true)
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -56,29 +34,32 @@ export default function Modal({ chartType, queryData, chartName }: ModalProps) {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            > 
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:max-w-[95%] sm:max-h-[95vh]"> 
+            >
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <div>
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                      {name}
+                      Add a chart
                     </Dialog.Title>
-                    {/* <div className="mt-2">
-                        {isBar && <Barchart queryData={data} propWidth={700} propHeight={500}/>}
-                        {isLine && <Linechart queryData={data} propWidth={700} propHeight={500}/>}
-                    </div> */}
+                    <div className="mt-2">
+                        <ChartForm></ChartForm>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <ChartForm></ChartForm>
-                </div>
                 <div className="mt-5 sm:mt-6">
+                    <button
+                    type="button"
+                    className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    onClick={() => setOpen(false)}
+                  >
+                    Submit
+                  </button>
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={() => setOpen(false)}
                   >
-                    Go back to dashboard
+                    Cancel
                   </button>
                 </div>
               </Dialog.Panel>

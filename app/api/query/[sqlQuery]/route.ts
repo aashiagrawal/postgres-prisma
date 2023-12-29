@@ -27,3 +27,13 @@ export async function GET(request: NextRequest, { params }: { params: { sqlQuery
         return new Response("Internal Server Error", { status: 500 });
     }
 }
+
+// export async function POST(request: NextRequest) {
+//     try {
+//         const body = await request.json();
+//         console.log(body);
+//     } catch (error: any){
+//         console.error("Error retrieving body:", error.message);
+//         return new Response("Internal Server Error", { status: 500 });
+//     }
+// }

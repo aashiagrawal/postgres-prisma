@@ -15,6 +15,7 @@ export async function GET(request: NextRequest, { params }: { params: { name: st
             },
         });
         if (dashboard) {
+            // console.log(NextResponse.json(dashboard.Chart))
             return NextResponse.json(dashboard.Chart) 
             // res.status(200).json(dashboard.Chart)
         } else {

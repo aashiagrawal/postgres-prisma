@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Chart from '@/components/chart';
 import AITextBox from "./AITextBox";
+import FormModal from "./FormModal";
 
 type DashboardProps = {
     charts: any[];
@@ -9,6 +10,11 @@ type DashboardProps = {
 }
 
 const Dashboard = ({ charts, containerStyle, onClickDashboardItem}: DashboardProps) => {
+
+    const [showModal, setShowModal] = useState(false)
+    const handleOnAddChartClick = () => {
+        setShowModal(!showModal);
+    }
     return (
         <div style={containerStyle}>
             <div>
@@ -29,6 +35,18 @@ const Dashboard = ({ charts, containerStyle, onClickDashboardItem}: DashboardPro
                         </div>
                     </li>
                 ))}
+                <li className="flex w-full items-center  p-6">
+                    <div className="flex w-full items-center justify-between space-x-6 p-6">
+                        <div className="flex-1 truncate">
+                            <div className="flex items-center space-x-3 justify-center">
+                                <div className="text-3xl" onClick={handleOnAddChartClick}>
+                                    +
+                                </div>
+                                {/* {showModal && <FormModal dashboardId={chart.}></FormModal>} */}
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     );
